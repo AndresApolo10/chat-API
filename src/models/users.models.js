@@ -11,7 +11,7 @@ const Users = db.define('users', {
     firstName: {
         type: DataTypes.STRING,
         allowNull: false,
-        field: 'firsr_name'
+        field: 'first_name'
     },
     lastName: {
         type: DataTypes.STRING,
@@ -30,36 +30,15 @@ const Users = db.define('users', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    profileImage: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'profile_image'
+    },
     phone:{
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
-    },
-    birthday:{
-        type: DataTypes.DATEONLY,
-        allowNull: false
-    },
-    gender:{
-        type: DataTypes.STRING,
-    },
-    role:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: 'normal'
-    },
-    country:{
-        type: DataTypes.STRING,
-    },
-    status:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: 'active'
-    },
-    isVerified:{
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        field: 'is_verified',
-        defaultValue: false
     }
 })
 

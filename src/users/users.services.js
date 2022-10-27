@@ -22,11 +22,11 @@ const getAllUsers = (req, res) => {
  }
 
  const registerUser = (req, res) => {
-    const { firstName, lastName, email, password, phone, birthday, gender, country } = req.body
+    const { firstName, lastName, email, password, profileImage, phone } = req.body
 
-    if(firstName && lastName && email && password && phone && birthday){
+    if(firstName && lastName && email && password && profileImage && phone){
         usersControllers.createUser({
-            firstName, lastName, email, password, phone, birthday, gender, country  
+            firstName, lastName, email, password, profileImage, phone  
         })
             .then(data => {
                 res.status(201).json(data)
@@ -40,17 +40,17 @@ const getAllUsers = (req, res) => {
             lastName: 'string',
             email: 'example@example.com',
             password: 'string',
-            phone: '521231231231',
-            birthday: 'YYYY/MM/DD'
+            profileImage: 'string',
+            phone: '521231231231'
         }})
     }
  }
 
  const patchUser = (req, res) => {
     const id = req.params.id
-    const { firstName, lastName, phone, gender, country } = req.body
+    const { firstName, lastName, profileImage, phone } = req.body
 
-    usersControllers.updateUser(id, { firstName, lastName, phone, gender, country })
+    usersControllers.updateUser(id, { firstName, lastName, profileImage, phone })
         .then(data => {
             if(data[0]){
                 res.status(200).json({message: `User with ID: ${id}, edited succesfully `})
@@ -92,9 +92,9 @@ const getAllUsers = (req, res) => {
 
  const patchMyUser = (req, res) => {
     const id = req.user.id
-    const { firstName, lastName, phone, birthday, gender, country } = req.body;
+    const { firstName, lastName, profileImage, phone } = req.body;
 
-    usersControllers.updateUser(id, { firstName, lastName, phone, birthday, gender, country })
+    usersControllers.updateUser(id, { firstName, lastName, profileImage, phone })
         .then(() => {
                 res.status(200).json({message: `Your User was edited succesfully `})
 
@@ -106,7 +106,7 @@ const getAllUsers = (req, res) => {
 
  const deleteMyUser = (req, res) => {
     const id = req.user.id
-    usersControllers.updateUser(id, { status: "inactive" })
+    usersControllers.updateUser(id)
         .then(() => {
             res.status(200).json({ message: `Your user was deleted succesfully!`})
         })
